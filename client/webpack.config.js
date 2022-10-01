@@ -23,9 +23,26 @@ module.exports = () => {
         title: 'Webpack Plugin',
       }),
       new InjectManifest({
-        swSrc: './src/sw.js',
-        swDest: 'service-worker.js'
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js'
       }),
+      new WebpackPwaManifest({
+        name: 'PWA Text Editor',
+        short_name: 'TEdit',
+        description: 'A text editor',
+        background_color: '#225ca3',
+        theme_color: '#225ca3',
+        start_url: './',
+        publicPath: './',
+        fingerprints:false,
+        icons: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            size: 96,
+            destination: path.join('assets', 'icons'),
+          },
+        ],
+      })
     ],
 
     module: {
