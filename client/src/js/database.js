@@ -13,7 +13,8 @@ const initdb = async () =>
   });
 
 
-export const putDb = async (content) => {
+export const putDb = async (content) => {//console.log('put not created');
+
   console.log('Post in database');
   const contactDb = await openDB('jate', 1);
   const tx = contactDb.transaction('jate', "readwrite");
@@ -24,20 +25,26 @@ export const putDb = async (content) => {
 }
 
 
-export const getDb = async () => {
+export const getDb = async () => {//console.log('get not created');
+// {
   console.log('GET from the database');
-    // Create a connection to the IndexedDB database and the version we want to use.
   const contactDb = await openDB('jate', 1);
-    // Create a new transaction and specify the store and data privileges.
   const tx = contactDb.transaction('jate', 'readonly');
-  // Open up the desired object store.
   const store = tx.objectStore('jate');
-    // Use the .getAll() method to get all data in the database.
-  const request = store.getAll();
-
+  
+  // test code
+  //tried to get get? the answer is here
+  // end test code
+  const request = store.getAll(); //instead of get all??? how to get it to set initially instead of null
+  // maybe an if statement?
   const result = await request;
   console.log('result.value', result)
-  return result
+  if (result.length===0){
+    return undefined
+  } else {
+    return result[result.length-1].content
+  }
+  //return result.content this makes the local storage work because it breaks it. LOL. Maybe not get all but get last?
 }
 
 initdb();
