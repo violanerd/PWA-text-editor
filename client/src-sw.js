@@ -26,6 +26,5 @@ warmStrategyCache({
 
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
-// TODO: Implement asset caching // NOT CORRECT - error message: unsupported route type 
-// what assets are we caching?
+// TODO: Implement asset caching // Went the other route of GenerateSW
 registerRoute();

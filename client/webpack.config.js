@@ -1,8 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackPwaManifest = require('webpack-pwa-manifest');
 const path = require('path');
-const { InjectManifest } = require('workbox-webpack-plugin');
-
+//const { InjectManifest } = require('workbox-webpack-plugin');
+const WorkboxPlugin = require('workbox-webpack-plugin');
 // TODO: Add and configure workbox plugins for a service worker and manifest file.
 // TODO: Add CSS loaders and babel to webpack.
 
@@ -22,8 +22,11 @@ module.exports = () => {
         template: './index.html',
         title: 'Webpack Plugin',
       }),
-      new InjectManifest({
-        swSrc: './src-sw.js',
+      // new InjectManifest({
+      //   swSrc: './src-sw.js',
+      //   swDest: 'src-sw.js'
+      // }),
+      new WorkboxPlugin.GenerateSW({
         swDest: 'src-sw.js'
       }),
       new WebpackPwaManifest({
@@ -38,9 +41,14 @@ module.exports = () => {
         icons: [
           {
             src: path.resolve('src/images/logo.png'),
-            size: 96,
+            size: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
+          // {
+          // not the right thing to do, not sure hwo to get it  src: path.resolve('favicon.ico'),
+          //   size: 96,
+          //   destination: path.join('dist'),
+          // },
         ],
       })
     ],
@@ -48,7 +56,7 @@ module.exports = () => {
     module: {
       rules: [
         {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          test: /\.(png|svg|jpg|jpeg|gif|ico)$/i,
           type: 'asset/resource',
         },
         {
