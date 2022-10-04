@@ -13,7 +13,7 @@ A browser text editor developed to be a progressive web app utilizing local stor
 ```npm install``` then ```npm start``` (npm start will run build script and start the server)
 
 ## Usage
-View on heroku here: 
+View on heroku here: https://morning-sands-42867.herokuapp.com/
 
 ## Built With
 * idb, workbox, webpack, express, node, concurrently
