@@ -26,5 +26,5 @@ warmStrategyCache({
 
 registerRoute(({ request }) => request.mode === 'navigate', pageCache);
 
-// TODO: Implement asset caching // Went the other route of GenerateSW
+// TODO: Implement asset caching --> Went the other route of GenerateSW
 registerRoute();

@@ -13,8 +13,7 @@ const initdb = async () =>
   });
 
 
-export const putDb = async (content) => {//console.log('put not created');
-
+export const putDb = async (content) => {
   console.log('Post in database');
   const contactDb = await openDB('jate', 1);
   const tx = contactDb.transaction('jate', "readwrite");
@@ -25,18 +24,14 @@ export const putDb = async (content) => {//console.log('put not created');
 }
 
 
-export const getDb = async () => {//console.log('get not created');
-// {
+export const getDb = async () => {
   console.log('GET from the database');
   const contactDb = await openDB('jate', 1);
   const tx = contactDb.transaction('jate', 'readonly');
   const store = tx.objectStore('jate');
   
-  // test code
-  //tried to get get? the answer is here
-  // end test code
-  const request = store.getAll(); //instead of get all??? how to get it to set initially instead of null
-  // maybe an if statement?
+ 
+  const request = store.getAll(); 
   const result = await request;
   console.log('result.value', result)
   if (result.length===0){
@@ -44,7 +39,7 @@ export const getDb = async () => {//console.log('get not created');
   } else {
     return result[result.length-1].content
   }
-  //return result.content this makes the local storage work because it breaks it. LOL. Maybe not get all but get last?
+  
 }
 
 initdb();
